@@ -1,0 +1,10 @@
+Commands:
+!Kill <Username>
+!Kick <Username>
+!Unequip <Username>
+!Sudo <word>
+!Bring <Username>
+!Freeze <Username>
+!Unfreeze <Username>
+!Walkspeed <Amount>
+!Jumppower <Amount>
