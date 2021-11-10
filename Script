@@ -1,0 +1,88 @@
+local function Kill()
+    game.Players.LocalPlayer.Character:BreakJoints()
+end
+local function freeze()
+    walkspeed = game.Players.LocalPlayer.Character.Humanoid.WalkSpeed
+   game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 0
+end
+local function ws(value)
+    game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = value 
+end
+local function jp(value)
+   game.Players.LocalPlayer.Character.Humanoid.JumpPower = value 
+end
+local function unfreeze()
+    game.Players.LocalPlayer.Humanoid.WalkSpeed = walkspeed
+end
+local function unequip1()
+    game.Players.LocalPlayer.Character.Humanoid:UnequipTools()
+end
+local function kick(msg)
+    game.Players.LocalPlayer:Kick(msg)
+end
+local function talk(msg)
+local args = {
+    [1] = msg,
+    [2] = "All"
+}
+game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(unpack(args))
+end
+local function bring(plr20)
+    game.Players.LocalPlayer.Character.HumanoidRootPart.Position = plr20.Character.HumanoidRootPart.Position
+end
+
+game.Players.PlayerAdded:Connect(function(plr1)
+    plr1.Chatted:Connect(function(v4)
+        local v6 = string.split(v4, " ")
+        local v7, v8 = v6[1], v6[2]
+        if plr1:IsFriendsWith(game.Players.LocalPlayer.UserId) then
+            if v7 == "!Kill" and v8 == game.Players.LocalPlayer.Name then
+                Kill()
+            elseif v7 == "!Unequip" and v8 == game.Players.LocalPlayer.Name then
+                unequip1()
+            elseif v7 == "!Kick" and v8 == game.Players.LocalPlayer.Name then
+                kick("You have been kicked by"..plr1.Name)
+            elseif v7 == "!Sudo" then
+                talk(v8)
+            elseif v7 == "!Bring" and v8 == game.Players.LocalPlayer.Name then
+                bring(plr1)
+            elseif v7 == "!Freeze" and v8 == game.Players.LocalPlayer.Name then
+                freeze()
+            elseif v7 == "!Unfreeze" and v8 == game.Players.LocalPlayer.Name then
+                unfreeze()
+            elseif v7 == "!Walkspeed" then
+                ws(v8)
+            elseif v7 == "!Jumppower" then
+                jp(v8)
+            end
+        end
+    end)
+end)
+
+for i,v in pairs(game.Players:GetChildren()) do
+    v.Chatted:Connect(function(v4)
+        local v11 = string.split(v4, " ")
+        local v9, v10 = v11[1], v11[2]
+        if v:IsFriendsWith(game.Players.LocalPlayer.UserId) then
+        if v9 == "!Kill" and v10 == game.Players.LocalPlayer.Name then
+            Kill()
+        elseif v9 == "!Unequip" and v10 == game.Players.LocalPlayer.Name then
+            unequip1()
+        elseif v9 == "!Kick" and v10 == game.Players.LocalPlayer.Name then
+            kick("You have been kicked by"..v.Name)
+        elseif v9 == "!Sudo" then
+            talk(v10)
+        elseif v9 == "!Bring" and v10 == game.Players.LocalPlayer.Name then
+            bring(v)
+        elseif v9 == "!Freeze" and v10 == game.Players.LocalPlayer.Name then
+            freeze()
+        elseif v9 == "!Unfreeze" and v10 == game.Players.LocalPlayer.Name then
+            unfreeze()
+        elseif v9 == "!Walkspeed" then
+            ws(v10)
+        elseif v9 == "!Jumppower" then
+            jp(v10)
+            end
+        end
+    end)
+end
